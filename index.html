@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="images/favicon.jpg" type="image/gif" sizes="16x16">
+  <meta name="theme-color" content="black" />
+  <link rel="manifest" href="manifest.json">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width , initial-scale=1.0">
+  <title>Music Player</title>
+  <link rel="stylesheet" href="assets/css/style.css" title="" type="" />
+ 
+  <!-- FontAwsome icons  CSS and JavaScript -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/regular.min.js" type="text/javascript" charset="utf-8"></script>
+ 
+  <script type="text/javascript" charset="utf-8">
+    //if browser support service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    };
+
+
+  </script>
+  <style type="text/css" media="all">
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+    .fa-search {
+      font-size: 20px;
+      color: white;
+    }
+    .fa-search:active {
+      color: green;
+    }
+    .modal {
+      background: black;
+      position: absolute;
+      z-index: 8;
+      width: 96%;
+      margin: 15px 2%;
+      height: 85vh;
+      border-radius: 20px;
+      box-shadow: 1px 1px 4px 0 rgba(0,0,0,.2);
+      visibility: hidden;
+      transition: 0.5s ease-in-out;
+      opacity: 0;
+      overflow: hidden;
+    }
+    .select_songs {
+      background: black;
+      width: 100%;
+      text-transform: capitalize;
+      padding: 15px 20px;
+      border-bottom: 1px solid #2F2F2F;
+    }
+    .select_songs:hover {
+      background: #333;
+
+    }
+    .myspan {
+      position: relative;
+      top: 2px;
+      font-size: 22px;
+      left: 10px;
+    }
+    .ri {
+      float: right;
+      position: relative;
+      top: 5px;
+      font-weight: bold;
+    }
+
+    .noResponse {
+      width: 100%;
+      height: 90%;
+      background: black;
+      border-radius: 20px;
+      text-align: center;
+      padding-top: 20%;
+      font-size: 25px;
+    }
+    .noResponse >span {
+      display: block;
+      position: relative;
+      top: -30px;
+      font-family: 'Amatic SC', cursive;
+    }
+
+    .noResponse > i {
+      font-size: 50px;
+    }
+    .error {
+      height: 70%;
+      width: 50%;
+    }
+    .loser {
+      padding-right: 4px;
+    }
+    .online {
+      padding: 2px;
+      position: absolute;
+      width: 100%;
+      top: -21px;
+      text-align: center;
+      font-size: 12px;
+      overflow: hidden;
+      height: 21px;
+      transition: top 0.2s ease;
+      z-index: 200;
+    }
+    .fontAwsome {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      top: -1px;
+
+    }
+    #fontAwsome {
+      top: -1px;
+      font-size: 12px;
+    }
+    .search {
+      background: #222;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      height: 100vh;
+      z-index: 200;
+      visibility: hidden;
+      transition: 0.2s ease-in-out;
+      opacity: 0;
+      overflow: scroll;
+    }
+    .searchBar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      overflow: hidden;
+      background: black;
+      padding: 5px 0px;
+      margin-bottom: 0px;
+    }
+    #back {
+      width: 10%;
+      background: black;
+      text-align: center;
+      padding: 10px;
+    }
+    #search {
+      width: 88%;
+      padding: 10px;
+      border: 1.5px solid black;
+      border-radius: 3px;
+      outline: none;
+      background: #333;
+      overflow-x: hidden;
+    }
+    #search::placeholder {
+      font-family: 'Poppins', sans-serif;
+    }
+    #search:focus {
+      border-color: gold;
+      background: #444;
+      color: white;
+    }
+    .searchResults {}
+    .search-result {
+      background: #333;
+      width: 95%;
+      margin: 5px 2.5%;
+      padding: 10px;
+      border-radius: 7px;
+      z-index: 2;
+      position: relative;
+    }
+    .search-result:hover {
+      background: white;
+      color: purple;
+      transition: 0.2s ease;
+    }
+    .noResults {
+      text-align: center;
+      position: relative;
+      top: 35%;
+      font-size: 18px;
+      padding: 10px;
+      color: #70707080;
+      height: 0;
+    }
+
+
+    .menu .icons {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .menu .icons > span {
+      position: absolute;
+      background: #fff;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: ripples0.6s linear infinite;
+    }
+    .menu > div > i {
+      pointer-events: none;
+    }
+    .menu > div > .menu_class {
+      pointer-events: none;
+    }
+
+@keyframes ripples {
+      0% {
+        width: 0px;
+        height: 0px;
+        opacity: 0.5;
+      }
+      100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+      }
+    }
+   
+    .ChangeDiv , .miniPlayer  , .controls  , .menu {
+      max-width: 500px;
+      height: auto;
+    }
+ @media screen and (max-width:649px){
+   body{
+     margin:0px;
+   }
+ }
+@media screen and (min-width: 650px) {
+      ::-webkit-scrollbar-thumb{
+         background: grey;
+      }
+      ::-webkit-scrollbar{
+        background: rgba(0,0,0,0.2);
+         width: 15px;
+      }
+      .flowSmooth{
+        height:82vh;
+        overflow-x:hidden;
+      }
+      .extraControls{
+        height: 85vh;
+        transform: translate(0%, 5%);
+      }
+      .bg{
+        height:100%;
+      }
+      .rImg{
+        width: auto;
+      }
+      .menu {
+        top: 0%;
+        bottom: none;
+        left: 0;
+        transform: rotate(90deg) translate(60%, 250%);
+      }
+      .menu > * {
+        transform: rotate(270deg);
+      }
+      .body {
+        margin-left: 20%;
+      }
+      .overflow{
+        overflow-x: hidden;
+      }
+      .ChangeDiv {
+        min-height: 800px;
+        width: 48%;
+        margin: auto 0px;
+        transform: translate(-10%, -23%);
+        overflow-x: Hidden;
+      }
+      .miniPlayer {
+        transform: translate(90% , 0%);
+        width: 40%;
+      }
+      .controls {
+        transform: translate(92% , 0%);
+        width: 50%;
+      }
+      .overflow {
+        height: 82vh;
+      }
+      .splimg {
+        width: 38%;
+        max-width: 450px;
+        height: 400px;
+        position: absolute;
+        right:  0px;
+        top: 50%;
+        transform: translate(-7% , -25%);
+        border-radius: 20px;
+        background-image: url(wallpapy.jpg);
+        background-size: cover;
+        animation: cool 20s ease-in-out infinite;
+      }
+      .modal{
+        height:87vh;
+        margin:0px;
+        top:8%;
+        position: fixed;
+        left: 18%;
+        width: 50%;
+        max-width: 400px;
+        z-index: 4000 ;
+        box-shadow: 1px 1px 4px 0 rgba(255,255,255,.2);
+      }
+      .new-modal{
+       visibility: hidden;
+        opacity:0;
+        background: rgba(0,0,0,0.8);
+        height:100vh;
+        width: 150vw;
+        left: -15%;
+        margin:0px auto;
+        backdrop-filter: blur(10px);
+        z-index:3000;
+        position:fixed;
+       
+      }
+      body{
+        position: absolute;
+        top:0px;
+        left:0px;
+        width:100%;
+        max-width: 1200px;
+        margin-left: 5%;
+        padding-top: 10px;
+     
+      }
+      .icons, .ChangeDiv h3 , .playview , .cMenu  ,.fa-search  ,.shuffle_playlist , .play_playlist , .eMenu , .speed {
+        cursor:pointer
+      }
+      .miniPlayer input{
+        cursor:pointer
+      }
+      #vol{
+        cursor: pointer;
+      }
+    }
+
+@keyframes cool {
+      0% {
+        background-color: steelblue;
+        background-blend-mode: darken;
+      }
+      10% {
+        background-color: blue;
+        background-blend-mode: darken;
+      }
+      20% {
+        background-color: firebrick;
+        background-blend-mode: darken;
+      }
+      30% {
+        background-color: orange;
+        background-blend-mode: darken;
+      }
+      40% {
+        background-color: green;
+        background-blend-mode: darken;
+      }
+      50% {
+        background-color: maroon;
+        background-blend-mode: darken;
+      }
+      60% {
+        background-color: #ca25ef;
+        background-blend-mode: darkenb
+      }
+      70% {
+        background-color: lavendar;
+        background-blend-mode: darken;
+      }
+      80% {
+        background-color: #eea726;
+        background-blend-mode: darken;
+      }
+      90% {
+        background-color:  pink;
+        background-blend-mode: darken;
+      }
+      100% {
+        background-color: teal;
+        background-blend-mode: darken;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="new-modal" onclick="hideMe()">
+    
+  </div>
+  <div class="body">
+    <div class="search">
+      <div class="searchBar">
+        <div id="back">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <input type="search" name="search" id="search" value="" placeholder="Search Songs" />
+
+      </div>
+      <div class="noResults">
+        Nothing To Display
+      </div>
+      <div class="searchResults">
+
+      </div>
+    </div>
+    <div class="modal">
+
+      <div id="selectitem_1" class="select_songs">
+        <span class="fa-layers fa-fw fa-1x">
+          <i class="fas fa-square-full" data-fa-transform="shrink-8 right-4 down-2.7" data-fa-mask="fas fa-bars"></i>
+          <i class="fas fa-play" data-fa-transform="shrink-8 right-6 down-4"></i>
+        </span> <span class="myspan">Playlists </span>
+        <span class="ri"> > </span>
+      </div>
+      <div id="selectitem_2" class="select_songs">
+        <i class="fas fa-compact-disc"></i>  <span class="myspan">Albums</span>
+        <span class="ri"> > </span>
+      </div>
+      <div id="selectitem_3" class="select_songs">
+        <i class="fa fa-music" aria-hidden="true"></i>  <span class="myspan">Songs </span>
+        <span class="ri"> > </span>
+      </div>
+      <div id="selectitem_4" class="select_songs">
+        <i class="fas fa-user-alt"></i> <span class="myspan">Artists </span>
+        <span class="ri"> > </span>
+      </div>
+      <div class="DarkMode">
+        <span id="darktext">Dark Mode</span>  <span class="letsGo" onclick="turns()">
+          <button id="go"></button>
+          <span id="flow"><i class="fas fa-moon"></i></span> </span>
+      </div>
+    </div>
+    <audio id="playmusic" ontimeupdate="update()">
+      <track id="subtitles" kind="subtitles" label="English subtitles" src="" srclang="en" default />
+
+    </audio>
+    <br />
+    <div class="miniPlayer">
+      <!--The mini Player-->
+      <div class="playimg_img">
+        <img class="imgP" id="song_poster" src="images/asset.jpg" alt="music" />
+
+      </div>
+
+      <div class="range">
+        <span class='song_Display'><span id='song_name'>Song Name </span>-<span id="song_artist">Artist</span></span>
+        <input type="range" name="" id="miniPlayer" min="0" max="100" value="0" />
+        <div id="time">
+          00:00
+        </div>
+        <span id="TotalTime">00:00</span>
+      </div>
+      <div class="p">
+        <i class="fa fa-search"></i>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br />
+
+    <div class="controls">
+      <div class="cMenu" onclick="backwardAudio()">
+        <i class="fas fa-angle-double-left"></i>
+      </div>
+      <div class="cMenu" id="previous">
+        <i class="fas fa-angle-left"></i>
+      </div>
+      <div class="cMenu" id="play_pause">
+        <i class="fa fa-play" aria-hidden="true"></i>
+      </div>
+      <div class="cMenu" id="next">
+        <i class="fas fa-angle-right"></i>
+
+      </div>
+      <div class="cMenu" onclick="forwardAudio()">
+        <i class="fas fa-angle-double-right"></i>
+      </div>
+
+    </div>
+    <br>
+    <div class="ChangeDiv">
+      <h3 onclick="mun()">All Songs<span id="count"></span></h3>
+
+      <div class="overflow" id="overflow">
+        <br>
+
+      </div>
+      <div id="ober">
+        h
+      </div>
+    </div>
+
+
+    <div class="menu">
+      <div id="icon_1" class="gold icons">
+        <i class="ic fas fa-home"></i>
+        <div class="menu_class">
+          Home
+        </div>
+      </div>
+
+      <div id="icon_3" class="icons">
+        <i class="ic fas fa-music"></i>
+        <div class="menu_class">
+          Music
+        </div>
+      </div>
+      <div id="logo" class="icons spl">
+        <i class="randomMe fas fa-random"></i>
+        <div class="menu_class spl_c">
+          n
+        </div>
+      </div>
+      <div id="icon_2" class="icons">
+        <i style="transform:rotate(90deg)" class="fas fa-sliders-h"></i>
+        <div class="menu_class">
+          Controls
+        </div>
+      </div>
+      <div id="icon_4" class="icons">
+        <i class="ic fa fa-bars" aria-hidden="true"></i>
+        <div class="menu_class">
+          Menu
+        </div>
+      </div>
+    </div>
+    <div class="online"></div>
+
+    <span id="get_id" style="display:none"></span>
+    <span id="lol"></span>
+  </div>
+  <div class="splimg"></div>
+
+  <script id="myJs" type="text/javascript" charset="utf-8">
+
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    var  darkMode;
+    var back = document.getElementById('back');
+    var music;
+    $(document).ready(function() {
+      if (music == undefined) {
+        document.querySelector('.ChangeDiv').innerHTML = '<div class="noResponse">  <img src="images/error.png" alt=""  class="error"/><span><i class="loser fa fa-frown-o" aria-hidden="true"></i>Internal Server Error</span></div>'
+      }
+    });
+    var new_poster = '';
+    var new_artist = "";
+    var new_title = "";
+  </script>
+  <script src="songs.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/js/Main.js" type="text/javascript" charset="utf-8"></script>
+
+  <script type="text/javascript" charset="utf-8">
+
+
+    // # Light Mode
+
+    $('#logo').on('click', function() {
+
+      var shuffling = Math.round(Math.random() * songs.length);
+      toogle_function(shuffling);
+    });
+
+    $('#icon_4').on('click', function() {
+      showMe();
+      $('.modal').css('visibility', 'visible')
+      $('.modal').css('opacity', '1')
+    });
+
+
+    var item_1 = document.getElementById('selectitem_1');
+    var item_2 = document.getElementById('selectitem_2');
+    var item_3 = document.getElementById('selectitem_3');
+    var item_4 = document.getElementById('selectitem_4');
+
+
+    item_1.onclick = function() {
+      var itis = document.getElementById('icon_3');
+      itis.click();
+
+    }
+
+
+    item_2.onclick = function() {}
+
+    item_3.onclick = function() {
+      var itis = document.getElementById('icon_1');
+      itis.click();
+   
+
+    }
+
+    item_4.onclick = function() {
+
+      //  $('.modal').html(data);
+    }
+
+    function toogle_replica (one) {
+      songs = myplaylist;
+      loadSongs(one);
+      var playMusicBtn = document.getElementById('play_pause')
+      playMusicBtn.click();
+    }
+
+
+
+    function mun() {
+
+      var tellMe = confirm("Do you want to reload ? ");
+
+      if (tellMe == true) {
+        songs = songs_playlist;
+
+        var icon1 = document.getElementById('icon_1')
+        icon1.click();
+        $('#get_id').text(" ");
+        $('.song').removeClass('active')
+
+      }
+    }
+
+    var lol = document.getElementById('lol');
+    music.onplay = ()=> {
+      lol.click();
+    }
+    music.onpause = ()=> {
+      lol.click();
+    }
+
+    try {
+      navigator.mediaSession.setActionHandler('previoustrack', function() {
+        previous_song.click();
+      });
+
+
+      navigator.mediaSession.setActionHandler('nexttrack', function() {
+        next_song.click();
+      });
+      navigator.mediaSession.setActionHandler('seekbackward', function() {
+        backwardAudio();
+
+      });
+
+      navigator.mediaSession.setActionHandler('seekforward', function() {
+
+        forwardAudio();
+
+      });
+
+      navigator.mediaSession.setActionHandler('seekto', (details) => {
+        if (details.fastSeek && "fastSeek" in music) {
+          // Only use fast seek if supported.
+          music.fastSeek(details.seekTime);
+          return;
+        }
+        music.currentTime = details.seekTime;
+        // TODO: Update playback state.
+      });
+
+    }
+
+    // For advance MediaMetadata.album
+
+    catch(e) {
+      // For Debug Check :
+      //console.log(e)
+      // alert("Unable to set Music Meta Data");
+    }
+
+
+
+    // No db search
+    $(document).ready(function() {
+      $('.fa-search').on('click', function() {
+        $('body').css('overflow', 'hidden')
+
+        $('.search').css('visibility', 'visible');
+        $('.search').css('opacity', '1');
+
+        setTimeout(function() {
+          $('input')[0].focus()
+        }, 100);
+
+      });
+
+
+
+      $('#search').on('keyup', function() {
+        $('.searchResults').html("");
+        var search = $(this).val();
+        var str, checkStr;
+        var i = 0;
+
+        while (i <= songs_playlist.length-1) {
+          str = songs_playlist[i].name;
+          checkStr = str.toLowerCase();
+          search = search.toLowerCase();
+
+          if (checkStr.includes(search) == true || checkStr.indexOf(search) != -1) {
+
+
+            $('.noResults').html("");
+
+            $('.searchResults').append('<div onclick="search_toggle('+i+')" class="search-result">'+str+'</div>');
+
+
+            if (search == "") {
+              $('.searchResults').html("")
+              $('.noResults').html('Search Your Favourite Music ')
+            }
+          }
+
+
+
+          // console.log(songs[i].name)
+          i = i+1;
+        }
+      });
+
+      document.getElementById("search").addEventListener("search",
+        function(event) {
+          $(".searchResults").empty();
+          $('.noResults').html('Search Your Favourite Music ')
+        });
+
+
+
+    });
+    back.onclick = ()=> {
+      $('.search').css('visibility', 'hidden');
+      $('.search').css('opacity', '0');
+      $(".searchResults").empty();
+      $('#search').val("");
+      $('.noResults').html('Nothing To Display')
+    }
+
+
+    /*
+    $('.menu > div').on('click' , function(e){
+        window.navigator.vibrate(50 , 100)
+        setTimeout( function(){
+       window.navigator.vibrate(0)
+        },50)
+                // console.log(e.target)
+        let y = e.offsetHeight - e.target.offsetTop;
+        let x = e.offsetLeft - e.target.offset;
+        let ripple = document.createElement("span");
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        this.appendChild(ripple);
+        setTimeout(function(){
+          ripple.remove();
+        }, 500); // 1second = 1000ms
+    })
+    */
+    //   console.log(this)
+
+    $(document).ready(function() {
+      if (darkMode == false) {
+        $('body').css('filter', 'invert(1)')
+        $('body').css('background', '#eaeaea')
+
+        //$('h3').css('color' , 'black')
+        $('img').css('filter', 'invert(1)')
+      }
+    });
+
+
+    function changeImg() {
+      $('img').css('filter',
+        'invert(1)')
+    }
+    // console.log($('div'))
+    var CheckMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+
+    // For Mode Switch
+    function darkModeOff() {
+      $('body').css('filter',
+        'invert(1)')
+      $('img').css('filter',
+        'invert(1)')
+      $('body').css('background-color',
+        '#eaeaea')
+      $('.online').css('filter',
+        'invert(1)');
+      darkMode = false;
+
+    }
+    function darkModeOn() {
+      $('body').css('filter',
+        'invert(0)')
+      $('img').css('filter',
+        'invert(0)')
+      $('body').css('background-color',
+        '#1D1D1D');
+      $('.online').css('filter',
+        'invert(0)');
+      darkMode = true;
+
+    }
+    function turns() {
+      if (darkMode == false) {
+        darkModeOn()
+        $('#flow').css('left', '27px');
+        $('#flow').html('<i class="fas fa-moon"></i>')
+
+      } else {
+        darkModeOff()
+        $('#flow').css('left', '3px');
+        $('#flow').html('<i class="fas fa-sun"></i>')
+
+
+      }
+    }
+
+/*
+    if (window.matchMedia) {
+      // Check if the dark-mode Media-Query matches
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        darkModeOn()
+        $('#flow').css('left', '27px');
+        $('#flow').html('<i class="fas fa-moon"></i>')
+        //  alert('dark')
+      } else {
+        darkModeOff()
+        $('#flow').css('left', '3px');
+        $('#flow').html('<i class="fas fa-sun"></i>')
+        //  alert('light')
+      }
+    } else {
+      // Default (when Media-Queries are not supported)
+      alert('Stop Using Outdated Browser !\n Please Update or Chanve to Chrome(recommend)')
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      //alert(`changed to ${e.matches ? "dark" : "light"} mode`)
+      if (e.matches == true) {
+        darkModeOn();
+        $('#flow').css('left', '27px');
+        $('#flow').html('<i class="fas fa-moon"></i>')
+      } else {
+        darkModeOff();
+        $('#flow').css('left', '3px');
+        $('#flow').html('<i class="fas fa-sun"></i>')
+      }
+    });
+*/
+
+
+
+
+    if (navigator.onLine == false) {
+
+      $('.online').css('top', '0px');
+      $('.online').css('background', 'white');
+      $('.online').css('color', 'black');
+
+      $('.online').html('<i class="fas fa-no-wifi"></i><span id="fontAwsome">  Please Check Your Connection</span>')
+      setTimeout(function() {
+        $('.online').css('top', '-21px')
+      }, 3500);
+    }
+
+    window.addEventListener('online', function() {
+
+
+      $('.online').css('top', '0px');
+      $('.online').css('background', 'green');
+      $('.online').css('color', 'white');
+      $('.online').html('<i class="fas fa-wifi"></i><span id="fontAwsome"> Back Online</span>')
+      setTimeout(function() {
+        $('.online').css('top', '-21px')
+      }, 3500);
+
+    });
+
+    window.addEventListener('offline', function() {
+
+
+      $('.online').css('top', '0px');
+      $('.online').css('background', 'white');
+      $('.online').css('color', 'black');
+
+      $('.online').html('<i class="fas fa-no-wifi"></i><span id="fontAwsome">  Please Check Your Connection</span>')
+      setTimeout(function() {
+        $('.online').css('top', '-21px')
+      }, 3500);
+    });
+
+
+
+
+function hideMe(){
+  $('.new-modal').css('visibility' , 'hidden');
+  $('.new-modal').css('opacity' , '0');
+     $('.modal').css('visibility' , 'hidden')
+       $('.modal').css('opacity' , '0')
+       
+}
+
+function showMe(){
+   $('.new-modal').css('visibility' , 'visible');
+  $('.new-modal').css('opacity' , '1');
+  
+}
+/*
+$('body').on('scroll', function (e){
+    $('body').scrollTop = '0';
+});
+*/
+  </script>
+</body>
+</html>
