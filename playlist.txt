@@ -73,7 +73,7 @@
       
       $.ajax({
          url : "playlists/playlist_"+id+".js",
-         type : "post", 
+         type : "get", 
          beforeSend : function(){
                if(darkMode == false){
                changeImg();
