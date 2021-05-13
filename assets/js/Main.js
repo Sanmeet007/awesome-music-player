@@ -37,7 +37,7 @@ function loadSongs(id){
        block: "center"
      });
      */
-element.parentNode.scrollTop = element.offsetTop - 100;
+element.parentNode.scrollTop = element.offsetTop - 20;
 
   //   element.scrollTop = "0";
    }catch(e){
@@ -230,7 +230,7 @@ element.parentNode.scrollTop = element.offsetTop - 100;
        behavior: "smooth",
        block: "center"
      });*/
-     element.parentNode.scrollTop = element.offsetTop - 300;
+     element.parentNode.scrollTop = element.offsetTop - 20;
         },
         error: function(){
           alert("something went Wrong")
