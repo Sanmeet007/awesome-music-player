@@ -112,7 +112,7 @@ element.parentNode.scrollTop = element.offsetTop - 100;
         
         $.ajax({
         url : "extra.txt" , 
-        type: "post",
+        type: "get",
      
         beforeSend : function (){
           
@@ -202,7 +202,7 @@ element.parentNode.scrollTop = element.offsetTop - 100;
         // iam = true;
         $.ajax({
         url : "home.txt" , 
-        type: "post",
+        type: "get",
         beforeSend : function (){
           
         },
@@ -239,7 +239,7 @@ element.parentNode.scrollTop = element.offsetTop - 100;
        // iam = true;
         $.ajax({
         url : "playlist.txt" , 
-        type: "post",
+        type: "get",
         beforeSend : function (){
           
         },
