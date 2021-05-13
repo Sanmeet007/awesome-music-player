@@ -5,7 +5,18 @@
    var shuffled = false;
    var giveSong , giveArtist , givePoster , now_poster ;
   // Main Js   
- 
+ let divHtml = `
+
+   <h3 onclick="mun()">All Songs<span id="count"></span></h3>
+    
+    
+      <div class="overflow" id="overflow">
+        <br>
+ <div  class="loader">
+          <i class="fas fa-circle-notch fa-spin"></i>
+     </div>
+      </div>
+ `;
 var songs = songs_playlist;
 
  var songname = document.getElementById('song_name') ;
@@ -115,14 +126,13 @@ element.parentNode.scrollTop = element.offsetTop - 100;
         type: "get",
      
         beforeSend : function (){
-          
+         $('.ChangeDiv').html(divHtml);
+         showLoader();
         },
-        complete: function (){
-         
-        },
+    
         success: function(data , status){
-         
-          $('.ChangeDiv').html(data);
+         hideLoader()
+         $('.ChangeDiv').html(data);
            var animate = document.querySelector('.animate');
            if(music.paused== false){
             animate.style.animationPlayState="running";
@@ -204,13 +214,13 @@ element.parentNode.scrollTop = element.offsetTop - 100;
         url : "home.txt" , 
         type: "get",
         beforeSend : function (){
-          
+          $('.ChangeDiv').html(divHtml);
+          showLoader();
         },
-        complete: function (){
-         
-        },
+        
         success: function(data , status){
-          $('.ChangeDiv').html(data);
+         hideLoader();
+         $('.ChangeDiv').html(data);
               var  get_id =  $('#get_id').html();
        $('.song').removeClass("active");
        $('#'+get_id).addClass("active");
@@ -220,7 +230,7 @@ element.parentNode.scrollTop = element.offsetTop - 100;
        behavior: "smooth",
        block: "center"
      });*/
-     element.parentNode.scrollTop = element.offsetTop - 100;
+     element.parentNode.scrollTop = element.offsetTop - 300;
         },
         error: function(){
           alert("something went Wrong")
@@ -241,13 +251,13 @@ element.parentNode.scrollTop = element.offsetTop - 100;
         url : "playlist.txt" , 
         type: "get",
         beforeSend : function (){
-          
+         $('.ChangeDiv').html(divHtml);
+          showLoader();
         },
-        complete: function (){
-         
-        },
+      
         success: function(data , status){
-          $('.ChangeDiv').html(data)
+         hideLoader()
+         $('.ChangeDiv').html(data)
           
         },
         error: function(){
@@ -274,8 +284,7 @@ element.parentNode.scrollTop = element.offsetTop - 100;
          $('#icon_3').addClass("gold");
       });
       $('#icon_4').on("click" , function(){
-         $('.icons').removeClass('gold');
-         $('#icon_4').addClass("gold");
+        turns();
        // iam = false;
       });
      
@@ -589,4 +598,13 @@ music.onended = function (){
     
     
     });
+    
+ function showLoader(){
+   $('.loader').css("visibility" , "visible");
+   $('.loader').css("opacity" , "1");
+ }
+ function hideLoader(){
+   $('.loader').css("visibility" , "visible");
+   $('.loader').css("opacity" , "1");
+ }
    
