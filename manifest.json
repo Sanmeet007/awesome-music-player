@@ -3,17 +3,17 @@
     "name": "Music Player",
     "icons": [
       {
-        "src": "/images/splashScreen.jpg",
-        "type": "image/png",
+        "src": "https://sanmeet007.github.io/awesome-music-player/images/splashScreen.jpg",
+        "type": "image/jpg",
         "sizes": "192x192"
       },
       {
-        "src": "/images/splashScreen.jpg",
-        "type": "image/png",
+        "src": "https://sanmeet007.github.io/awesome-music-player/images/splashScreen.jpg",
+        "type": "image/jpg",
         "sizes": "512x512"
       }
     ],
-    "start_url": "./index.html",
+    "start_url": "https://sanmeet007.github.io/awesome-music-player/index.html",
     "background_color": "white",
     "display": "standalone",
     "orientation":"portrait",
