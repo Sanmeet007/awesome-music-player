@@ -206,7 +206,7 @@
     .menu > div > .menu_class {
       pointer-events: none;
     }
-
+  
 @keyframes ripples {
       0% {
         width: 0px;
@@ -388,6 +388,24 @@
         background-blend-mode: darken;
       }
     }
+    .ChangeDiv{
+      position: relative;
+    }
+    .loader{
+      position:absolute;
+      top:0px;
+      height:100%;
+      background:black;
+      width:100%;
+      z-index: 3000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+     visibility: hidden;
+      opacity: 0;
+    }
   </style>
 </head>
 
@@ -489,15 +507,11 @@
     </div>
     <br>
     <div class="ChangeDiv">
-      <h3 onclick="mun()">All Songs<span id="count"></span></h3>
-
+   <h3 onclick="mun()">All Songs<span id="count"></span></h3>
       <div class="overflow" id="overflow">
         <br>
-
       </div>
-      <div id="ober">
-        h
-      </div>
+      <div id="ober">Hello World</div>
     </div>
 
 
@@ -528,9 +542,9 @@
         </div>
       </div>
       <div id="icon_4" class="icons">
-        <i class="ic fa fa-bars" aria-hidden="true"></i>
+        <i class="ic fa fa-sun" aria-hidden="true"></i>
         <div class="menu_class">
-          Menu
+          Mode
         </div>
       </div>
     </div>
@@ -550,9 +564,10 @@
     var back = document.getElementById('back');
     var music;
     $(document).ready(function() {
-      if (music == undefined) {
+    /*  if (music == undefined) {
         document.querySelector('.ChangeDiv').innerHTML = '<div class="noResponse">  <img src="images/error.png" alt=""  class="error"/><span><i class="loser fa fa-frown-o" aria-hidden="true"></i>Internal Server Error</span></div>'
       }
+      */
     });
     var new_poster = '';
     var new_artist = "";
@@ -572,11 +587,7 @@
       toogle_function(shuffling);
     });
 
-    $('#icon_4').on('click', function() {
-      showMe();
-      $('.modal').css('visibility', 'visible')
-      $('.modal').css('opacity', '1')
-    });
+  
 
 
     var item_1 = document.getElementById('selectitem_1');
@@ -782,7 +793,7 @@
         'invert(1)')
     }
     // console.log($('div'))
-    var CheckMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  //  var CheckMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 
     // For Mode Switch
@@ -813,15 +824,22 @@
     function turns() {
       if (darkMode == false) {
         darkModeOn()
-        $('#flow').css('left', '27px');
-        $('#flow').html('<i class="fas fa-moon"></i>')
+        $('#icon_4').html(`
+        <i class="ic fa fa-sun" aria-hidden="true"></i>
+        <div class="menu_class">
+          Mode
+        </div>
+        `);
 
       } else {
         darkModeOff()
-        $('#flow').css('left', '3px');
-        $('#flow').html('<i class="fas fa-sun"></i>')
-
-
+        $('#icon_4').html(`
+        <i class="ic fa fa-moon" aria-hidden="true"></i>
+        <div class="menu_class">
+          Mode
+        </div>
+        `);
+      
       }
     }
 
