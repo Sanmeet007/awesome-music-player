@@ -5,12 +5,10 @@ self.addEventListener('install', function(event) {
       // cache any static files that make up the application shell
      return cache.addAll(
         [
-          '/index.html',
-          '/assets/css/style.css',
-          '/fontAwsome/css/all.css',
-          '/fontAwsome/js/all.js',
-          '/images/asset.jpg',
-          '/images/error.png'
+          'https://sanmeet007.github.io/awesome-music-player/index.html',
+          'https://sanmeet007.github.io/awesome-music-player/assets/css/style.css',
+          'https://sanmeet007.github.io/awesome-music-player/images/asset.jpg',
+          'https://sanmeet007.github.io/awesome-music-player/images/error.png'
         ]
       );
      
