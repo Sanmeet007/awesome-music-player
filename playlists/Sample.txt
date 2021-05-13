@@ -1,0 +1,84 @@
+/*
+Playlist Name 
+*/
+
+ var myplaylist =[
+  {
+  name:   "Song Name" , 
+  poster: "images/songImage.jpg" , 
+  src :   "music/song.mp3" ,
+  subtitles : "Subs/songSubtitles.vtt" ,
+  artist: "songArtist"
+  },
+  {
+  name:   "Song Name" , 
+  poster: "images/songImage.jpg" , 
+  src :   "music/song.mp3" ,
+  subtitles : "Subs/songSubtitles.vtt" ,
+  artist: "songArtist"
+  },
+  {
+  name:   "Song Name" , 
+  poster: "images/songImage.jpg" , 
+  src :   "music/song.mp3" ,
+  subtitles : "Subs/songSubtitles.vtt" ,
+  artist: "songArtist"
+  },
+  {
+  name:   "Song Name" , 
+  poster: "images/songImage.jpg" , 
+  src :   "music/song.mp3" ,
+  subtitles : "Subs/songSubtitles.vtt" ,
+  artist: "songArtist"
+  },
+  {
+  name:   "Song Name" , 
+  poster: "images/songImage.jpg" , 
+  src :   "music/song.mp3" ,
+  subtitles : "Subs/songSubtitles.vtt" ,
+  artist: "songArtist"
+  }
+]
+/*
+
+    ============== OR (EMPTY) ==============
+ 
+*/
+
+ var myplaylist =[
+  {
+  name:   "" , 
+  poster: "images/.jpg" , 
+  src :   "music/.mp3" ,
+  subtitles : "Subs/.vtt" ,
+  artist: ""
+  },
+  {
+  name:   "" , 
+  poster: "images/.jpg" , 
+  src :   "music/.mp3" ,
+  subtitles : "Subs/.vtt" ,
+  artist: ""
+  },
+  {
+  name:   "" , 
+  poster: "images/.jpg" , 
+  src :   "music/.mp3" ,
+  subtitles : "Subs/.vtt" ,
+  artist: ""
+  },
+  {
+  name:   "" , 
+  poster: "images/.jpg" , 
+  src :   "music/.mp3" ,
+  subtitles : "Subs/.vtt" ,
+  artist: ""
+  },
+  {
+  name:   "" , 
+  poster: "images/.jpg" , 
+  src :   "music/.mp3" ,
+  subtitles : "Subs/.vtt" ,
+  artist: ""
+  },
+]
