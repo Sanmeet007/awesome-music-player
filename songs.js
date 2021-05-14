@@ -3,14 +3,13 @@
  * Awsome Music player  --version  2.5.7
 */
 var songs_playlist = [
-  {
-  name:   "Flutter" , 
-  poster: "images/flutter.jpg" , 
-  src :   "music/flutter.mp3" ,
-  subtitles : "subs/empty.vtt" ,
-  artist: "Diamond Eyes"
-  }
-  , 
+{
+  name:   "Shape of You" , 
+  poster: "images/shapeofyou.jpg" , 
+  src :   "music/shapeofyou.mp3" ,
+  subtitles : "subs/shapeofyou1.vtt" ,
+  artist: "Ed Sheeran"
+  },
   {
   name:   "Despacito" , 
   poster: "images/despacito.jpg" , 
@@ -19,11 +18,11 @@ var songs_playlist = [
   artist: "Luis Fonsi"
   },
   {
-  name:   "Shape of You" , 
-  poster: "images/shapeofyou.jpg" , 
-  src :   "music/shapeofyou.mp3" ,
-  subtitles : "subs/shapeofyou1.vtt" ,
-  artist: "Ed Sheeran"
+  name:   "Flutter" , 
+  poster: "images/flutter.jpg" , 
+  src :   "music/flutter.mp3" ,
+  subtitles : "subs/empty.vtt" ,
+  artist: "Diamond Eyes"
   },
   {
   name:   "Chandelier" , 
