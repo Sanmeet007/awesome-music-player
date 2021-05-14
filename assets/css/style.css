@@ -876,7 +876,7 @@ h4 {
     top: 50%;
     transform: translate(-7% , -25%);
     border-radius: 20px;
-    background-image: url(wallpapy.jpg);
+    background-image: url(../../wallpapy.jpg);
     background-size: cover;
     animation: cool 20s ease-in-out infinite;
   }
