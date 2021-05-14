@@ -1,36 +1,35 @@
- 
-    <h3 onclick="mun()" class="mine">All Songs<span id="count"></span></h3>
-   
-     <div class="overflow" id="overflow">
-    <br>
-    </div>
-    <div id="ober">h</div>
-  
+<h3 onclick="mun()" class="mine">All Songs<span id="count"></span></h3>
+
+<div class="overflow" id="overflow">
+<br>
+</div>
+<div id="ober">h</div>
+
 
 <script>
-    
- var songsTotal = songs.length;
-  
-     
-      var songnumber = 0;
-         songsTotal = songsTotal -1;
-         
-      function LoadMySongs(){
-   while(songnumber <= songsTotal){
-     
-      if(songnumber <= songsTotal){
-        var loadsong = "";
-    loadsong= songs[songnumber];
-     
-    
-    $('#overflow').append(' <div onclick="toogle_function('+songnumber+')" class="song playview" id="'+songnumber+'">       <div class="songImg">        <img class="songPoster" src="'+loadsong.poster+'" alt="" />       </div>   <div class="name">'+loadsong.name+'  <br>     <span id="artist">'+loadsong.artist+'</span>      </div>    </div>');
-  
-      songnumber = songnumber +1;
-      }
-   }
-      }
-      LoadMySongs()
-      if(darkMode == false){
-         changeImg();
-       }
+
+var songsTotal = songs.length;
+
+
+var songnumber = 0;
+songsTotal = songsTotal -1;
+
+function LoadMySongs(){
+while(songnumber <= songsTotal){
+
+if(songnumber <= songsTotal){
+var loadsong = "";
+loadsong= songs[songnumber];
+
+
+$('#overflow').append(' <div onclick="toogle_function('+songnumber+')" class="song playview" id="'+songnumber+'">       <div class="songImg">        <img class="songPoster" src="'+loadsong.poster+'" alt="" />       </div>   <div class="name">'+loadsong.name+'  <br>     <span id="artist">'+loadsong.artist+'</span>      </div>    </div>');
+
+songnumber = songnumber +1;
+}
+}
+}
+LoadMySongs()
+if(darkMode == false){
+changeImg();
+}
 </script>
