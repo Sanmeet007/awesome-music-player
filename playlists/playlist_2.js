@@ -7,7 +7,7 @@ English Songs
   name:   "Flutter" , 
   poster: "images/flutter.jpg" , 
   src :   "music/flutter.mp3" ,
-  subtitles : "Subs/.vtt" ,
+  subtitles : "subs/empty.vtt" ,
   artist: "Diamond Eyes"
   }
   , 
@@ -15,21 +15,21 @@ English Songs
   name:   "Despacito" , 
   poster: "images/despacito.jpg" , 
   src :   "music/despacito.mp3" ,
-  subtitles : "Subs/despacito.vtt" ,
+  subtitles : "subs/despacito.vtt" ,
   artist: "Luis Fonsi"
   },
   {
   name:   "Shape of You" , 
   poster: "images/shapeofyou.jpg" , 
   src :   "music/shapeofyou.mp3" ,
-  subtitles : "Subs/shapeofyou1.vtt" ,
+  subtitles : "subs/shapeofyou1.vtt" ,
   artist: "Ed Sheeran"
   },
   {
   name:   "Chandelier" , 
   poster: "images/chandelier.jpg" , 
   src :   "music/chandelier.mp3" ,
-  subtitles : "Subs/.vtt" ,
+  subtitles : "subs/empty.vtt" ,
   artist: "Luis Fonsi"
     
   },
@@ -37,28 +37,28 @@ English Songs
   name:   "South of the Border" , 
   poster: "images/southofborder.jpg" , 
   src :   "music/southofborder.mp3" ,
-  subtitles : "Subs/southofborder.vtt" ,
+  subtitles : "subs/southofborder.vtt" ,
   artist: "Ed Sheeran"
   },
   {
   name:   "Taki Taki" , 
   poster: "images/taki.jpg" , 
   src :   "music/taki.mp3" ,
-  subtitles : "Subs/taki.vtt" ,
+  subtitles : "subs/taki.vtt" ,
   artist: "DJ Snake"
   },
   {
   name:   "Havana" , 
   poster: "images/havana.jpg" , 
   src :   "music/havana.mp3" ,
-  subtitles : "Subs/havana.vtt" ,
+  subtitles : "subs/Havana.vtt" ,
   artist: "Camila Cabello"
   },
   {
     name:   "Make Me move" , 
   poster: "images/makemove.jpg" , 
   src :   "music/makemove.mp3" ,
-  subtitles : "subs/makemve.vtt" ,
+  subtitles : "" ,
   artist: "Feat. Karra"
   },
   {
@@ -100,7 +100,7 @@ English Songs
     name:   "Symphony" , 
   poster: "images/symphony.jpg" , 
   src :   "music/symphony.mp3" ,
-  subtitles : "subs/symphony_.vtt" ,
+  subtitles : "subs/empty.vtt" ,
   artist: "Clean Bandit - feat. Zara Larsson"
   },
    
