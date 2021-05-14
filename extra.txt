@@ -1,165 +1,165 @@
-  <div class="extraControls">
-  <div class="bg">
-      <div class="eta">
- 
-      <div class="rotateImg">
-        <img class="rImg animate" src="" alt="" />
-      </div>
-       <div class="info">
-        <span style="text-transform:uppercase" id='heman'> Hero Jam Project</span><br>
-         <span id="author">Sanmeet</span>
-       </div>
-       </div>
-     <div class="lyrics" id="captions">
-     <!--Hello Guys Lyrics Here..--> 
-     </div>
-     
-      <br>
-      <div class="PlaySpeed">
-        <div  id="s_1" onclick="playBackRate(0.5 , 1)" class="speed">
-         .5 ×
-        </div>
-        <div id="s_2" onclick="playBackRate(0.75 , 2)" class="speed">
-         .7 ×
-        </div>
-        <div id="s_3" onclick="playBackRate(1.0 , 3 )" class="speed clicked">
-         1 ×
-        </div>
-        <div id="s_4" onclick="playBackRate(2.0 ,4 )" class="speed ">
-         2 ×
-        </div>
-        <div id="s_5" onclick="playBackRate(3.0, 5)" class="speed">
-         3 ×
-        </div>
-       
-      
-      </div>
-      <br>
-      
-      <div class="ctrl">
-        <div id="stop" onclick="stop()" class="eMenu">
-        <i class="fa fa-stop" aria-hidden="true"></i>
-         </div>
-        <div id="mute" class="eMenu">
-         <i class="fas fa-volume-mute"></i>
-         </div>
-        <div id="shuffle_toggle" class="eMenu">
-          <i class="fa fa-random" aria-hidden="true"></i>
-         </div>
-        <div id="loop" class="eMenu">
-        <i class="fas fa-undo"></i>
-         </div>
-      
- 
-      </div>
-      
-    <div class="volume">
-     <div class="voldiv">
-     <!-- <i class="iconFont fas fa-volume-mute"></i>-->
-     <i class="iconFont fas fa-volume-up"></i>
-     </div>
-      <input type="range" name="" id="vol" value="100" min="0" max="100"/>
-      
-     <script>
-       // Volume Control
-      var myVol;
-      $('#vol').on('input' , function(){
-     
-        myVol = $('#vol').val();
-       
-        $('#vol').css('background' , ' linear-gradient(90deg,  #0581FD '+myVol+'% , #888 0)');
-        
-      });
-  
-     
-      
-       var animate = document.querySelector('.animate');
-       
-       document.addEventListener('click' , ()=>{
-      if(music.paused ==true){
-       animate.style.animationPlayState="paused";
-        
-      }else{
-      
-       animate.style.animationPlayState="running";
-      }
-      
-   });
-      var mute = document.getElementById('mute');
-         mute.onclick= function(){
-       
-         if(music.muted== true){
-            music.muted = false;
-            $('#mute').removeClass("clicked");
-           
-           }else{
-              
-         $('#mute').addClass("clicked");
-               music.muted= true;
-           }
-      }
-   
-   
-    var looping = false;
-   
-    $('#loop').on("click", function(){
-      
-      if(looping == false){
-        looping = true;
-      
-       $(this).addClass('clicked');
-         
-        document.getElementById("playmusic").loop = true;
-        
-      }else{
-        looping = false;
-       
-       $(this).removeClass('clicked');
-      
-        document.getElementById("playmusic").loop = false;
-      }
-    });
-       
-       
-       function stop(){
-        document.getElementById("playmusic").pause();
-        document.getElementById("playmusic").currentTime=0;
-        }
-        
-        $('#vol').on("input" , function(){
-             var vt = this.value ; 
-             
-             music.volume = vt/100;
-        });
-        
-       function playBackRate(rid , tid){
-        music.playbackRate = rid;
-         $('.speed').removeClass("clicked")
-         $('#s_'+tid).addClass("clicked")
-       }
-      
-        $('#shuffle_toggle').on("click" , function (){
-   
-   if(shuffled == false){
-     shuffled = true;
-      $("#shuffle_toggle").addClass('clicked');
-   }else{
-      shuffled = false;
-    //  $(this).html('shuffling disabled');
-      $("#shuffle_toggle").removeClass('clicked');
-   }
-   
-   }); 
-  
-    if(darkMode == false){
-      changeImg();
-   }
-   
-   if( shuffled == true){
-      $("#shuffle_toggle").addClass('clicked');
-      }
-   
-     </script>
-    </div>
-    </div>
-    </div>
+<div class="extraControls">
+<div class="bg">
+<div class="eta">
+
+<div class="rotateImg">
+<img class="rImg animate" src="" alt="" />
+</div>
+<div class="info">
+<span style="text-transform:uppercase" id='heman'> Hero Jam Project</span><br>
+<span id="author">Sanmeet</span>
+</div>
+</div>
+<div class="lyrics" id="captions">
+<!--Hello Guys Lyrics Here..-->
+</div>
+
+<br>
+<div class="PlaySpeed">
+<div  id="s_1" onclick="playBackRate(0.5 , 1)" class="speed">
+.5 ×
+</div>
+<div id="s_2" onclick="playBackRate(0.75 , 2)" class="speed">
+.7 ×
+</div>
+<div id="s_3" onclick="playBackRate(1.0 , 3 )" class="speed clicked">
+1 ×
+</div>
+<div id="s_4" onclick="playBackRate(2.0 ,4 )" class="speed ">
+2 ×
+</div>
+<div id="s_5" onclick="playBackRate(3.0, 5)" class="speed">
+3 ×
+</div>
+
+
+</div>
+<br>
+
+<div class="ctrl">
+<div id="stop" onclick="stop()" class="eMenu">
+<i class="fa fa-stop" aria-hidden="true"></i>
+</div>
+<div id="mute" class="eMenu">
+<i class="fas fa-volume-mute"></i>
+</div>
+<div id="shuffle_toggle" class="eMenu">
+<i class="fa fa-random" aria-hidden="true"></i>
+</div>
+<div id="loop" class="eMenu">
+<i class="fas fa-undo"></i>
+</div>
+
+
+</div>
+
+<div class="volume">
+<div class="voldiv">
+<!-- <i class="iconFont fas fa-volume-mute"></i>-->
+<i class="iconFont fas fa-volume-up"></i>
+</div>
+<input type="range" name="" id="vol" value="100" min="0" max="100"/>
+
+<script>
+// Volume Control
+var myVol;
+$('#vol').on('input' , function(){
+
+myVol = $('#vol').val();
+
+$('#vol').css('background' , ' linear-gradient(90deg,  #0581FD '+myVol+'% , #888 0)');
+
+});
+
+
+
+var animate = document.querySelector('.animate');
+
+document.addEventListener('click' , ()=>{
+if(music.paused ==true){
+animate.style.animationPlayState="paused";
+
+}else{
+
+animate.style.animationPlayState="running";
+}
+
+});
+var mute = document.getElementById('mute');
+mute.onclick= function(){
+
+if(music.muted== true){
+music.muted = false;
+$('#mute').removeClass("clicked");
+
+}else{
+
+$('#mute').addClass("clicked");
+music.muted= true;
+}
+}
+
+
+var looping = false;
+
+$('#loop').on("click", function(){
+
+if(looping == false){
+looping = true;
+
+$(this).addClass('clicked');
+
+document.getElementById("playmusic").loop = true;
+
+}else{
+looping = false;
+
+$(this).removeClass('clicked');
+
+document.getElementById("playmusic").loop = false;
+}
+});
+
+
+function stop(){
+document.getElementById("playmusic").pause();
+document.getElementById("playmusic").currentTime=0;
+}
+
+$('#vol').on("input" , function(){
+var vt = this.value ;
+
+music.volume = vt/100;
+});
+
+function playBackRate(rid , tid){
+music.playbackRate = rid;
+$('.speed').removeClass("clicked")
+$('#s_'+tid).addClass("clicked")
+}
+
+$('#shuffle_toggle').on("click" , function (){
+
+if(shuffled == false){
+shuffled = true;
+$("#shuffle_toggle").addClass('clicked');
+}else{
+shuffled = false;
+//  $(this).html('shuffling disabled');
+$("#shuffle_toggle").removeClass('clicked');
+}
+
+});
+
+if(darkMode == false){
+changeImg();
+}
+
+if( shuffled == true){
+$("#shuffle_toggle").addClass('clicked');
+}
+
+</script>
+</div>
+</div>
+</div>
