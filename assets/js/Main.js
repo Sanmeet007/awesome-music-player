@@ -90,8 +90,9 @@ element.parentNode.scrollTop = element.offsetTop - 120;
   //alert('hmm');
   try{
     document.getElementById('captions').innerHTML = (this.activeCues[0].text);
-  }catch(e){
- //   console.log(e);
+   console.log(this.activeCues[0].text);
+ }catch(e){
+    console.log(e);
   }
     
 });
