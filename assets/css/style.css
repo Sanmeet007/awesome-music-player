@@ -989,3 +989,34 @@ h4 {
   visibility: hidden;
   opacity: 0;
 }
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+@media screen and (max-height: 600px) {
+  .menu {
+    transform: translate(0px  , -15px);
+  }
+  .overflow{
+    height: 250px;
+  }
+  .ChangeDiv{
+    height: 300px;
+  }
+  .rImg{
+    height:auto;
+  }
+  .bg{
+    overflow-y: scroll;
+    padding-bottom: 10px;
+  }
+  .flowSmooth{
+    height: 250px;
+  }
+}
+.rImg{
+    height:auto;
+  }
