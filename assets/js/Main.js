@@ -88,6 +88,7 @@ element.parentNode.scrollTop = element.offsetTop - 120;
 
  document.getElementById('playmusic').textTracks[0].addEventListener('cuechange', function() {
   //alert('hmm');
+  console.log("Current .vtt source  => " +  $('#subtitles').attr('src') );
   try{
     document.getElementById('captions').innerHTML = (this.activeCues[0].text);
    console.log(this.activeCues[0].text);
