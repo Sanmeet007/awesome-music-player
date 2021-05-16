@@ -467,6 +467,7 @@ function togglePlay() {
 
 }
 $(document).ready(function() {
+  LoadMySongs()
   loadSongs(0);
   var get_id = $('#get_id').html();
   $('.song').removeClass("active")
@@ -674,7 +675,3 @@ function tryReloading(route){
       // code
   }
 }
-
-$(document).ready(function (){
-   LoadMySongs()
-});
