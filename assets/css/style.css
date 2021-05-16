@@ -96,7 +96,6 @@ body {
   margin-left: 6px;
   width: 44px;
   height: 44px;
-
 }
 .playimg_img {
   display: table-cell;
@@ -191,6 +190,7 @@ body {
   background: url("../../images/asset.jpg");
   background-size: 100%;
   overflow: hidden;
+  position:relative;
 }
 .song {
   background: #333;
@@ -613,20 +613,7 @@ h4 {
 .fa-search:active {
   color: green;
 }
-.modal {
-  background: black;
-  position: absolute;
-  z-index: 8;
-  width: 96%;
-  margin: 15px 2%;
-  height: 85vh;
-  border-radius: 20px;
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.2);
-  visibility: hidden;
-  transition: 0.5s ease-in-out;
-  opacity: 0;
-  overflow: hidden;
-}
+
 .select_songs {
   background: black;
   width: 100%;
@@ -1016,4 +1003,27 @@ h4 {
   .flowSmooth{
     height: 250px;
   }
+}
+
+
+.playimg_img{
+   position: relative;
+   overflow: hidden;
+ }
+.absolute{  
+  visibility: hidden;
+  position:absolute;
+  left: 0px;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(2px);
+  padding:12px;
+}
+.noResponse button{
+  padding: 10px;
+ color: #eaeeae;
+ background:none;
+ text-transform: uppercase;
+ border: 1px solid #eaeeae;
+ outline: none;
+ border-radius: 3px;
 }
