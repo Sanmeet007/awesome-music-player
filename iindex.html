@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="theme-color" content="black" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width , initial-scale=1.0">
+  
+  <link rel="icon" href="favicon/android-launchericon-192-192.png" type="image/png" sizes="192x192">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="assets/css/style.css"  type="text/css" />
+  
+  <link rel="apple-touch-icon" href="favicon/android-launchericon-192-192.png" sizes="192x192">
+  
+  <title>Music Player</title>
+  
+  <!-- FontAwsome icons  CSS and JavaScript -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/regular.min.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script type="text/javascript" charset="utf-8">
+    //if browser support service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    };
+  </script>
+ 
+</head>
+
+<body>
+  <div class="new-modal" onclick="hideMe()">
+
+  </div>
+  <div class="body">
+    <div class="search">
+      <div class="searchBar">
+        <div id="back">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <input type="search" name="search" id="search" value="" placeholder="Search Songs" />
+
+      </div>
+      <div class="noResults">
+        Nothing To Display
+      </div>
+      <div class="searchResults">
+
+      </div>
+    </div>
+    <!--<div class="modal">
+
+      <div id="selectitem_1" class="select_songs">
+        <span class="fa-layers fa-fw fa-1x">
+          <i class="fas fa-square-full" data-fa-transform="shrink-8 right-4 down-2.7" data-fa-mask="fas fa-bars"></i>
+          <i class="fas fa-play" data-fa-transform="shrink-8 right-6 down-4"></i>
+        </span> <span class="myspan">Playlists </span>
+        <span class="ri"> > </span>
+      </div>
+      <div id="selectitem_2" class="select_songs">
+        <i class="fas fa-compact-disc"></i>  <span class="myspan">Albums</span>
+        <span class="ri"> > </span>
+      </div>
+      <div id="selectitem_3" class="select_songs">
+        <i class="fa fa-music" aria-hidden="true"></i>  <span class="myspan">Songs </span>
+        <span class="ri"> > </span>
+      </div>
+      <div id="selectitem_4" class="select_songs">
+        <i class="fas fa-user-alt"></i> <span class="myspan">Artists </span>
+        <span class="ri"> > </span>
+      </div>
+      <div class="DarkMode">
+        <span id="darktext">Dark Mode</span>  <span class="letsGo" onclick="turns()">
+          <button id="go"></button>
+          <span id="flow"><i class="fas fa-moon"></i></span> </span>
+      </div>
+    </div>-->
+    <audio id="playmusic" ontimeupdate="update()" onloadstart="loadstart()" onloadeddata="loadeddata()" onwaiting="waiting()" onplaying="isplaying()">
+      <track id="subtitles" kind="subtitles" label="English subtitles" src="" srclang="en" default />
+
+    </audio>
+    <br />
+    <div class="miniPlayer">
+      <!--The mini Player-->
+      <div class="playimg_img">
+        <img class="imgP" id="song_poster" src="images/asset.jpg" alt="music" />
+        <img class="imgP absolute" src="icons/circle-notch.svg" alt="" />
+
+      </div>
+
+      <div class="range">
+        <span class='song_Display'><span id='song_name'>Song Name </span>-<span id="song_artist">Artist</span></span>
+        <input type="range" name="" id="miniPlayer" min="0" max="100" value="0" />
+        <div id="time">
+          00:00
+        </div>
+        <span id="TotalTime">00:00</span>
+      </div>
+      <div class="p">
+        <i class="fa fa-search"></i>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br />
+
+    <div class="controls">
+      <div class="cMenu" onclick="backwardAudio()">
+        <i class="fas fa-angle-double-left"></i>
+      </div>
+      <div class="cMenu" id="previous">
+        <i class="fas fa-angle-left"></i>
+      </div>
+      <div class="cMenu" id="play_pause">
+        <i class="fa fa-play" aria-hidden="true"></i>
+      </div>
+      <div class="cMenu" id="next">
+        <i class="fas fa-angle-right"></i>
+
+      </div>
+      <div class="cMenu" onclick="forwardAudio()">
+        <i class="fas fa-angle-double-right"></i>
+      </div>
+
+    </div>
+    <br>
+    <div class="ChangeDiv">
+      <h3 onclick="mun()">All Songs<span id="count"></span></h3>
+      <div class="overflow" id="overflow">
+        <br>
+      </div>
+      <div id="ober">
+        Hello World
+      </div>
+    </div>
+
+
+    <div class="menu">
+      <div id="icon_1" class="gold icons">
+        <i class="ic fas fa-home"></i>
+        <div class="menu_class">
+          Home
+        </div>
+      </div>
+
+      <div id="icon_3" class="icons">
+        <i class="ic fas fa-music"></i>
+        <div class="menu_class">
+          Music
+        </div>
+      </div>
+      <div id="logo" class="icons spl">
+        <i class="randomMe fas fa-random"></i>
+        <div class="menu_class spl_c">
+          n
+        </div>
+      </div>
+      <div id="icon_2" class="icons">
+        <i style="transform:rotate(90deg)" class="fas fa-sliders-h"></i>
+        <div class="menu_class">
+          Controls
+        </div>
+      </div>
+      <div id="icon_4" class="icons">
+        <i class="ic fa fa-sun" aria-hidden="true"></i>
+        <div class="menu_class">
+          Mode
+        </div>
+      </div>
+    </div>
+    <div class="online"></div>
+
+    <span id="get_id" style="display:none"></span>
+    <span id="lol"></span>
+  </div>
+  <div class="splimg"></div>
+
+  <script id="myJs" type="text/javascript" charset="utf-8">
+
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+ 
+    var  darkMode;
+    var back = document.getElementById('back');
+    var music;
+    $(document).ready(function() {
+       if (music == undefined) {
+        document.querySelector('.ChangeDiv').innerHTML = `
+        <div class="noResponse"> 
+        <img src="images/error.png" alt=""  class="error"/><span>
+        <i class="loser fa fa-frown-o" aria-hidden="true"></i>
+        Aw Snap Something Went Wrong
+        <br></br> 
+        <button onclick="tryReloading('home')"><i style="margin-right:5px" class="fas fa-redo"></i> Try Again </button>
+       </span>
+       
+        </div>`
+      }
+      
+    });
+    var new_poster = '';
+    var new_artist = "";
+    var new_title = "";
+  </script>
+  <script src="songs.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/js/Main.js" type="text/javascript" charset="utf-8"></script>
+
+  <script type="text/javascript" charset="utf-8">
+
+
+    // # Light Mode
+
+    $('#logo').on('click', function() {
+
+      var shuffling = Math.round(Math.random() * songs.length);
+      toogle_function(shuffling);
+    });
+
+
+
+
+
+    function toogle_replica (one) {
+      songs = myplaylist;
+      loadSongs(one);
+      var playMusicBtn = document.getElementById('play_pause')
+      playMusicBtn.click();
+    }
+
+
+
+    function mun() {
+
+      var tellMe = confirm("Do you want to reload ? ");
+
+      if (tellMe == true) {
+        songs = songs_playlist;
+
+        var icon1 = document.getElementById('icon_1')
+        icon1.click();
+        $('#get_id').text(" ");
+        $('.song').removeClass('active')
+
+      }
+    }
+
+    var lol = document.getElementById('lol');
+    music.onplay = ()=> {
+      lol.click();
+    }
+    music.onpause = ()=> {
+      lol.click();
+    }
+
+    try {
+      navigator.mediaSession.setActionHandler('previoustrack', function() {
+        previous_song.click();
+      });
+
+
+      navigator.mediaSession.setActionHandler('nexttrack', function() {
+        next_song.click();
+      });
+      navigator.mediaSession.setActionHandler('seekbackward', function() {
+        backwardAudio();
+
+      });
+
+      navigator.mediaSession.setActionHandler('seekforward', function() {
+
+        forwardAudio();
+
+      });
+
+      navigator.mediaSession.setActionHandler('seekto', (details) => {
+        if (details.fastSeek && "fastSeek" in music) {
+          // Only use fast seek if supported.
+          music.fastSeek(details.seekTime);
+          return;
+        }
+        music.currentTime = details.seekTime;
+        // TODO: Update playback state.
+      });
+
+    }
+
+    // For advance MediaMetadata.album
+
+    catch(e) {
+    
+    }
+
+
+
+    // No db search
+    $(document).ready(function() {
+      $('.fa-search').on('click', function() {
+        $('body').css('overflow', 'hidden')
+
+        $('.search').css('visibility', 'visible');
+        $('.search').css('opacity', '1');
+
+        setTimeout(function() {
+          $('input')[0].focus()
+        }, 100);
+
+      });
+
+
+
+      $('#search').on('keyup', function() {
+        $('.searchResults').html("");
+        var search = $(this).val();
+        var str, checkStr;
+        var i = 0;
+
+        while (i <= songs_playlist.length-1) {
+          str = songs_playlist[i].name;
+          checkStr = str.toLowerCase();
+          search = search.toLowerCase();
+
+          if (checkStr.includes(search) == true || checkStr.indexOf(search) != -1) {
+
+
+            $('.noResults').html("");
+
+            $('.searchResults').append('<div onclick="search_toggle('+i+')" class="search-result">'+str+'</div>');
+
+
+            if (search == "") {
+              $('.searchResults').html("")
+              $('.noResults').html('Search Your Favourite Music ')
+            }
+          }
+          i = i+1;
+        }
+      });
+
+      document.getElementById("search").addEventListener("search",
+        function(event) {
+          $(".searchResults").empty();
+          $('.noResults').html('Search Your Favourite Music ')
+        });
+
+
+
+    });
+    back.onclick = ()=> {
+      $('.search').css('visibility', 'hidden');
+      $('.search').css('opacity', '0');
+      $(".searchResults").empty();
+      $('#search').val("");
+      $('.noResults').html('Nothing To Display')
+    }
+
+
+  
+
+    $(document).ready(function() {
+      if (darkMode == false) {
+        $('body').css('filter', 'invert(1)')
+        $('body').css('background', '#eaeaea')
+
+        //$('h3').css('color' , 'black')
+        $('img').css('filter', 'invert(1)')
+      }
+    });
+
+
+    function changeImg() {
+      $('img').css('filter',
+        'invert(1)')
+    }
+ 
+    function darkModeOff() {
+      $('body').css('filter',
+        'invert(1)')
+      $('img').css('filter',
+        'invert(1)')
+      $('body').css('background-color',
+        '#eaeaea')
+      $('.online').css('filter',
+        'invert(1)');
+      darkMode = false;
+
+    }
+    function darkModeOn() {
+      $('body').css('filter',
+        'invert(0)')
+      $('img').css('filter',
+        'invert(0)')
+      $('body').css('background-color',
+        '#1D1D1D');
+      $('.online').css('filter',
+        'invert(0)');
+      darkMode = true;
+
+    }
+    function turns() {
+      if (darkMode == false) {
+        darkModeOn()
+        $('#icon_4').html(`
+          <i class="ic fa fa-sun" aria-hidden="true"></i>
+          <div class="menu_class">
+          Mode
+          </div>
+          `);
+
+      } else {
+        darkModeOff()
+        $('#icon_4').html(`
+          <i class="ic fa fa-moon" aria-hidden="true"></i>
+          <div class="menu_class">
+          Mode
+          </div>
+          `);
+
+      }
+    }
+
+    if (navigator.onLine == false) {
+
+      $('.online').css('top', '0px');
+      $('.online').css('background', 'white');
+      $('.online').css('color', 'black');
+
+      $('.online').html('<i class="fas fa-no-wifi"></i><span id="fontAwsome">  Please Check Your Connection</span>')
+      setTimeout(function() {
+        $('.online').css('top', '-21px')
+      }, 3500);
+    }
+
+    window.addEventListener('online', function() {
+
+
+      $('.online').css('top', '0px');
+      $('.online').css('background', 'green');
+      $('.online').css('color', 'white');
+      $('.online').html('<i class="fas fa-wifi"></i><span id="fontAwsome"> Back Online</span>')
+      setTimeout(function() {
+        $('.online').css('top', '-21px')
+      }, 3500);
+
+    });
+
+    window.addEventListener('offline', function() {
+
+
+      $('.online').css('top', '0px');
+      $('.online').css('background', 'white');
+      $('.online').css('color', 'black');
+
+      $('.online').html('<i class="fas fa-no-wifi"></i><span id="fontAwsome">  Please Check Your Connection</span>')
+      setTimeout(function() {
+        $('.online').css('top', '-21px')
+      }, 3500);
+    });
+
+
+
+
+    function hideMe() {
+      $('.new-modal').css('visibility', 'hidden');
+      $('.new-modal').css('opacity', '0');
+      $('.modal').css('visibility', 'hidden')
+      $('.modal').css('opacity', '0')
+
+    }
+
+    function showMe() {
+      $('.new-modal').css('visibility', 'visible');
+      $('.new-modal').css('opacity', '1');
+
+    }
+ 
+  </script>
+</body>
+</html>
