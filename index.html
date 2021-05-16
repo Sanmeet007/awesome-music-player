@@ -186,16 +186,7 @@
     var music;
     $(document).ready(function() {
        if (music == undefined) {
-        document.querySelector('.ChangeDiv').innerHTML = `
-        <div class="noResponse"> 
-        <img src="images/error.png" alt=""  class="error"/><span>
-        <i class="loser fa fa-frown-o" aria-hidden="true"></i>
-        Aw Snap Something Went Wrong
-        <br></br> 
-        <button onclick="tryReloading('home')"><i style="margin-right:5px" class="fas fa-redo"></i> Try Again </button>
-       </span>
-       
-        </div>`
+        document.querySelector('.ChangeDiv').innerHTML = '';
       }
       
     });
