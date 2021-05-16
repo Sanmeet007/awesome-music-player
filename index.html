@@ -16,13 +16,14 @@
   <!-- FontAwsome icons  CSS and JavaScript -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" type="text/css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/regular.min.js" type="text/javascript" charset="utf-8"></script>
-
+  
   <script type="text/javascript" charset="utf-8">
     //if browser support service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     };
   </script>
+ 
 </head>
 
 <body>
@@ -45,7 +46,7 @@
 
       </div>
     </div>
-    <div class="modal">
+    <!--<div class="modal">
 
       <div id="selectitem_1" class="select_songs">
         <span class="fa-layers fa-fw fa-1x">
@@ -71,8 +72,8 @@
           <button id="go"></button>
           <span id="flow"><i class="fas fa-moon"></i></span> </span>
       </div>
-    </div>
-    <audio id="playmusic" ontimeupdate="update()">
+    </div>-->
+    <audio id="playmusic" ontimeupdate="update()" onloadstart="loadstart()" onloadeddata="loadeddata()" onwaiting="waiting()" onplaying="isplaying()">
       <track id="subtitles" kind="subtitles" label="English subtitles" src="" srclang="en" default />
 
     </audio>
@@ -81,6 +82,7 @@
       <!--The mini Player-->
       <div class="playimg_img">
         <img class="imgP" id="song_poster" src="images/asset.jpg" alt="music" />
+        <img class="imgP absolute" src="icons/circle-notch.svg" alt="" />
 
       </div>
 
@@ -178,12 +180,22 @@
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">
+ 
     var  darkMode;
     var back = document.getElementById('back');
     var music;
     $(document).ready(function() {
        if (music == undefined) {
-        document.querySelector('.ChangeDiv').innerHTML = '<div class="noResponse">  <img src="images/error.png" alt=""  class="error"/><span><i class="loser fa fa-frown-o" aria-hidden="true"></i>Aw Snap Something Went Wrong</span></div>'
+        document.querySelector('.ChangeDiv').innerHTML = `
+        <div class="noResponse"> 
+        <img src="images/error.png" alt=""  class="error"/><span>
+        <i class="loser fa fa-frown-o" aria-hidden="true"></i>
+        Aw Snap Something Went Wrong
+        <br></br> 
+        <button onclick="tryReloading('home')"><i style="margin-right:5px" class="fas fa-redo"></i> Try Again </button>
+       </span>
+       
+        </div>`
       }
       
     });
@@ -208,32 +220,6 @@
 
 
 
-    var item_1 = document.getElementById('selectitem_1');
-    var item_2 = document.getElementById('selectitem_2');
-    var item_3 = document.getElementById('selectitem_3');
-    var item_4 = document.getElementById('selectitem_4');
-
-
-    item_1.onclick = function() {
-      var itis = document.getElementById('icon_3');
-      itis.click();
-
-    }
-
-
-    item_2.onclick = function() {}
-
-    item_3.onclick = function() {
-      var itis = document.getElementById('icon_1');
-      itis.click();
-
-
-    }
-
-    item_4.onclick = function() {
-
-      //  $('.modal').html(data);
-    }
 
     function toogle_replica (one) {
       songs = myplaylist;
