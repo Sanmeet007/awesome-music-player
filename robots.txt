@@ -13,6 +13,8 @@ Disallow: /icons/
 Disallow: /home.txt
 Disallow: /extra.txt
 Disallow: /playlist.txt
+Disallow: /README.md
+Disallow: /LICENSE
 
 
 
