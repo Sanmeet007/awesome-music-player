@@ -1,0 +1,17 @@
+User-agent: googlebot-image
+Disallow: /favicon/
+Disallow: /images/
+Disallow: /icons/
+
+User-agent: googlebot
+Disallow: /assets/
+Disallow: /favicon/
+Disallow: /images/
+Disallow: /playlists/
+Disallow: /subs/
+Disallow: /icons/
+
+
+
+User-agent: anothercrawler
+Disallow: /
