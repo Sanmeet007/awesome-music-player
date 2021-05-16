@@ -10,6 +10,9 @@ Disallow: /images/
 Disallow: /playlists/
 Disallow: /subs/
 Disallow: /icons/
+Disallow: /home.txt
+Disallow: /extra.txt
+Disallow: /playlist.txt
 
 
 
